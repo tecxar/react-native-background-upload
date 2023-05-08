@@ -10,11 +10,11 @@ NOTE: Use major version 4 with RN 47.0 and greater.  If you have RN less than 47
 
 ## 1. Install package
 
-`npm install --save react-native-background-upload`
+`npm install --save @jomari-wp/react-native-background-upload`
 
 or
 
-`yarn add react-native-background-upload`
+`yarn add @jomari-wp/react-native-background-upload`
 
 Note: if you are installing on React Native < 0.47, use `react-native-background-upload@3.0.0` instead of `react-native-background-upload`
 
