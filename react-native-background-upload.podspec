@@ -10,7 +10,7 @@ require "json"
    s.homepage = "https://github.com/Vydia/react-native-background-upload"
    s.authors = package[:author]
    s.summary = package[:description]
-   s.source = { git: package[:repository][:url] }
+   s.source = { :git => "https://github.com/cristianoccazinsp/react-native-background-upload", :tag => "v#{s.version}" }
    s.source_files = "ios/*.{h,m}"
    s.platform = :ios, "9.0"
 
