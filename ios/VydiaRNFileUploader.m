@@ -114,7 +114,12 @@ static VydiaRNFileUploader *sharedInstance;
 RCT_EXPORT_METHOD(getFileInfo:(NSString *)path resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     @try {
-        NSURL *fileUri = [NSURL URLWithString: path];
+
+        // Escape non latin characters in filename
+        NSString *escapedPath = [path stringByAddingPercentEncodingWithAllowedCharacters: NSCharacterSet.URLQueryAllowedCharacterSet];
+       
+        NSURL *fileUri = [NSURL URLWithString:escapedPath];
+
         NSString *pathWithoutProtocol = [fileUri path];
         NSString *name = [fileUri lastPathComponent];
         NSString *extension = [name pathExtension];
@@ -226,7 +231,7 @@ RCT_EXPORT_METHOD(startUpload:(NSDictionary *)options resolve:(RCTPromiseResolve
     @try {
         NSURL *requestUrl = [NSURL URLWithString: uploadUrl];
         if (requestUrl == nil) {
-            @throw @"Request URL cannot be nil";
+            @throw @"RN Uploader", @"URL not compliant with RFC 2396";
         }
 
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
