@@ -271,7 +271,8 @@ RCT_EXPORT_METHOD(startUpload:(NSDictionary *)options resolve:(RCTPromiseResolve
 
             NSData *httpBody = [self createBodyWithBoundary:uuidStr path:fileURI parameters: parameters fieldName:fieldName];
 
-            [request setHTTPBody: httpBody];
+            [request setHTTPBodyStream: [NSInputStream inputStreamWithData:httpBody]];
+            [request setValue:[NSString stringWithFormat:@"%zd", httpBody.length] forHTTPHeaderField:@"Content-Length"];
             uploadTask = [[self urlSession] uploadTaskWithStreamedRequest:request];
 
 
